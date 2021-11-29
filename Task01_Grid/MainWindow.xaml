@@ -1,0 +1,40 @@
+﻿<Window x:Class="GridApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GridApp"
+        mc:Ignorable="d"
+        Title="DockApp" Height="500" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="421*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Background="#FFFF9966" Margin="0,0,0,110" Grid.ColumnSpan="2">
+            <Menu DockPanel.Dock="Top" Height="25" VerticalAlignment="Top">
+                <!-- Код меню -->
+            </Menu>
+
+            <StackPanel DockPanel.Dock="Left" Background="#FF3399CC" Orientation="Vertical" Width="150">
+                <!-- Код Stack panel -->
+            </StackPanel>
+
+            <!-- «Строка статуса» -->
+        </DockPanel>
+
+        <DockPanel Background="BlanchedAlmond" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+            <Grid VerticalAlignment="Bottom" Height="110" Background="BlanchedAlmond">
+
+                <!-- Настройка Grid Column -->
+
+                <!-- Добавление блоков GridSplitter -->
+
+                <!-- Добавление WrapPanel нижним блоком в GridSplitter -->
+
+            </Grid>
+        </DockPanel>
+
+    </Grid>
+</Window>

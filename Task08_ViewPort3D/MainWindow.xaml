@@ -1,0 +1,87 @@
+﻿<Window x:Class="ForAssistantWpfApp3DTemplate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Sample3DAppTemplate" Height="450" Width="800">
+    <!-- В Window сверху нужно добавить обработчики KeyDown и KeyUp. -->
+    <!-- Также нужно добавить Focusable="True", иначе нажатия не будут считываться. -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" MinWidth="400" />
+            <ColumnDefinition Width="Auto" MinWidth="60"/>
+        </Grid.ColumnDefinitions>
+        <!-- Border нужен для того, чтобы ловить нажатия и движение мышки внутри viewport3D. -->
+        <!-- В Border можно поставить обработчики событий MouseDown, MouseMove. -->
+        <!-- Background у Border должен быть установлен, чтобы нажатия работали корректно. -->
+        <Border>
+            <Viewport3D Grid.Column="0" Name="viewport3D" Focusable="True">
+                <Viewport3D.Camera>
+                    <!-- В камере можно поменять Position и LookDirection -->
+                    <PerspectiveCamera x:Name="camera" Position="10 0 0" LookDirection="-10 0 0" />
+                </Viewport3D.Camera>
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <!-- В направленном свете можно менять направление. -->
+                        <!-- Также можно добавить другой свет, AmbientLight, например. -->
+                        <DirectionalLight x:Name="dirLightMain" Direction="-1,-1,-1">
+                        </DirectionalLight>
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+                <!-- ModelUIElement3D - модель, которая может регистрировать события внутри себя. -->
+                <!-- Здесь нужно подключить обработчик MouseDown, чтобы сделать "выбор" объекта -->
+                <ModelUIElement3D x:Name="mainModel">
+                    <ModelUIElement3D.Model>
+                        <!-- В эту группу, Model3DGroup, через её свойство Children можно добавлять другие объекты. -->
+                        <Model3DGroup x:Name="groupOfAllModels">
+                            <GeometryModel3D x:Name="standardCube">
+                                <GeometryModel3D.Geometry>
+                                    <!-- Positions - это точки этой фигуры (по 3 координаты на каждую) -->
+                                    <!-- TriangleIndices - это то, в каком порядке рисуются треугольники для этой фигуры -->
+                                    <!-- (координаты точек начинаются с нуля) -->
+                                    <MeshGeometry3D
+                                        Positions="0,0,0 1,0,0 0,1,0 1,1,0 
+                                                   0,0,1 1,0,1 0,1,1 1,1,1"
+                                        TriangleIndices="0,2,1 1,2,3 0,4,2 2,4,6 
+                                                         0,1,4 1,5,4 1,7,5 1,3,7
+                                                         4,5,6 7,6,5 2,6,3 3,6,7"/>
+                                </GeometryModel3D.Geometry>
+                                <!-- Изначально заданное перемещение для этого объекта. -->
+                                <GeometryModel3D.Transform>
+                                    <TranslateTransform3D OffsetX="-0.5" OffsetY="-0.5" OffsetZ="-0.5" />
+                                </GeometryModel3D.Transform>
+                                <!-- Материал для данного объекта. Можно менять цвет и другие характеристики. -->
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial x:Name="matDiffuseMain">
+                                        <DiffuseMaterial.Brush>
+                                            <SolidColorBrush Color="Red"/>
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+                            </GeometryModel3D>
+                            <Model3DGroup.Transform>
+                                <!-- К объекту можно применить несколько трансформаций, если объединить их в группу. -->
+                                <Transform3DGroup>
+                                    <RotateTransform3D CenterX="0.5" CenterY="0.5" CenterZ="0.5" >
+                                        <RotateTransform3D.Rotation>
+                                            <AxisAngleRotation3D x:Name="rotate" Axis="1 0 0"/>
+                                        </RotateTransform3D.Rotation>
+                                    </RotateTransform3D>
+                                    <TranslateTransform3D x:Name="translate"  OffsetZ="0" />
+                                </Transform3DGroup>
+                            </Model3DGroup.Transform>
+                        </Model3DGroup>
+                    </ModelUIElement3D.Model>
+                </ModelUIElement3D>
+            </Viewport3D>
+        </Border>
+
+        <!-- К plusButton уже подключен обработчик plusButton_Click. -->
+        <Button x:Name="plusButton" Content="+" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
+                Click="plusButton_Click" Height="40" Width="40" Background="LightGreen"/>
+
+        <Label Content="Место для слайдеров" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

@@ -1,0 +1,27 @@
+﻿<Window x:Class="DataGridSeminar.NewBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataGridSeminar"
+        mc:Ignorable="d"
+        Title="New Book" Height="270" Width="220">
+    <StackPanel Orientation="Horizontal"
+                Margin="10, 10, 10, 10">
+        <StackPanel Margin="0, 0, 0, 0">
+            <Label Content="ISBN" Margin="0, 0, 0, 10" Height="25"/>
+            <Label Content="Title" Margin="0, 0, 0, 10" Height="25"/>
+            <Label Content="Author" Margin="0, 0, 0, 10" Height="25"/>
+            <Label Content="Year" Margin="0, 0, 0, 10" Height="25"/>
+            <Label Content="Copies" Height="25"/>
+        </StackPanel>
+        <StackPanel Margin="30, 0, 0, 0">
+            <TextBox x:Name="ISBN" Margin="0, 0, 0, 10" Width="100" Height="25" PreviewTextInput="ISBN_PreviewTextInput"/>
+            <TextBox x:Name="Title" Margin="0, 0, 0, 10" Width="100" Height="25"/>
+            <TextBox x:Name="Author" Margin="0, 0, 0, 10" Width="100" Height="25"/>
+            <TextBox x:Name="Year" Margin="0, 0, 0, 10" Width="100" Height="25" PreviewTextInput="Year_PreviewTextInput"/>
+            <TextBox x:Name="Copies" Margin="0, 0, 0, 10" Width="100" Height="25" PreviewTextInput="Copies_PreviewTextInput"/>
+            <Button x:Name="readyButton" Width="100" Height="25" Content="OK" Click="readyButton_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
